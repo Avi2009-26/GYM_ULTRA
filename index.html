@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ULTRA Gym Social</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #0a0a0a;
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 100vh;
+      padding: 10px;
+      box-sizing: border-box;
+    }
+
+    /* Layout principale che sposta la casella ai fianchi su PC */
+    .main-wrapper {
+      display: flex;
+      flex-direction: row;
+      gap: 20px;
+      width: 100%;
+      max-width: 900px;
+      margin-top: 20px;
+    }
+
+    /* Casella motivazionale posizionata di lato (Sidebar) */
+    .sidebar-quote {
+      flex: 1;
+      background: linear-gradient(135deg, #111, #1c1c1c);
+      border: 2px solid #00ff88;
+      box-shadow: 0 0 15px rgba(0, 255, 136, 0.2);
+      padding: 25px;
+      border-radius: 16px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: fit-content;
+    }
+
+    .sidebar-quote h1 {
+      font-size: 26px;
+      color: #00ff88;
+      margin: 10px 0;
+      text-shadow: 0 0 10px rgba(0,255,136,0.5);
+    }
+
+    .sidebar-quote p {
+      font-size: 18px;
+      font-weight: bold;
+      letter-spacing: 0.5px;
+      margin: 15px 0;
+      line-height: 1.4;
+    }
+
+    .gym-art {
+      font-size: 45px;
+      margin: 10px 0;
+      color: #555;
+    }
+
+    /* Contenitore dell'applicazione principale (Centro) */
+    .container {
+      width: 100%;
+      max-width: 520px;
+      box-sizing: border-box; 
+    }
+
+    .card {
+      background: #1c1c1c;
+      padding: 15px;
+      margin: 12px 0;
+      border-radius: 12px;
+    }
+
+    input, select, button {
+      width: 100%;
+      padding: 12px;
+      margin-top: 10px;
+      border-radius: 10px;
+      border: none;
+      box-sizing: border-box;
+      font-size: 16px;
+    }
+
+    input, select {
+      background: #2a2a2a;
+      color: white;
+    }
+
+    button {
+      background: #00ff88;
+      color: #000;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    button:hover {
+      background: #00dd77;
+    }
+
+    .hidden { display: none !important; }
+
+    .post {
+      background: #222;
+      padding: 12px;
+      margin: 10px 0;
+      border-radius: 10px;
+    }
+
+    .like {
+      color: #ff4d4d;
+      cursor: pointer;
+      font-weight: bold;
+      border: none;
+      background: none;
+      display: inline;
+      padding: 0;
+      margin: 0;
+      width: auto;
+    }
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .status {
+      font-size: 12px;
+      opacity: 0.8;
+    }
+
+    /* GESTIONE TELEFONO: Sposta la casella sopra l'app a schermo intero */
+    @media (max-width: 768px) {
+      .main-wrapper {
+        flex-direction: column;
+        margin-top: 5px;
+      }
+      .sidebar-quote {
+        width: 100%;
+        box-sizing: border-box;
+        padding: 15px;
+      }
+      .sidebar-quote h1 { font-size: 22px; }
+      .sidebar-quote p { font-size: 16px; }
+      .gym-art { font-size: 30px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="main-wrapper">
+
+  <!-- CASELLA AI FIANCHI CON QUOTES IN INGLESE E ICONE PALESTRA -->
+  <div id="gym-sidebar" class="sidebar-quote hidden">
+    <div class="gym-art">🏋️‍♂️ ⚙️ 🏋️‍♀️</div>
+    <h1>No pain, no gain.</h1>
+    <p id="motivation-quote">NEVER GIVE UP!</p>
+    <div class="gym-art">🔥 🦾 🏆</div>
+  </div>
+
+  <!-- CONTAINER APP PRINCIPALE -->
+  <div class="container">
+
+    <h2>🔥AviEverest</h2>
+
+    <!-- LOGIN -->
+    <div id="login">
+      <div class="card">
+        <input id="name" placeholder="Dein Name">
+        <input id="code" placeholder="Access Code" type="password">
+        <button onclick="login()">Enter Gym</button>
+      </div>
+    </div>
+
+    <!-- APP -->
+    <div id="app" class="hidden">
+
+      <div class="card topbar">
+        <div>👤 <b id="user"></b></div>
+        <div class="status" id="status">⚪ offline</div>
+      </div>
+
+      <div class="card">
+        <input id="training" placeholder="Was trainierst du heute?">
+
+        <select id="shower">
+          <option>Dusche: Ja</option>
+          <option>Dusche: Nein</option>
+        </select>
+
+        <select id="sauna">
+          <option>Sauna: Ja</option>
+          <option>Sauna: Nein</option>
+        </select>
+
+        <button onclick="post()">Post Workout</button>
+      </div>
+
+      <h3>🏋️‍♂️ Feed</h3>
+      <div id="feed"></div>
+
+      <h3>💬 Chat</h3>
+      <div class="card">
+        <input id="msg" placeholder="Nachricht">
+        <button onclick="send()">Senden</button>
+      </div>
+
+      <div id="chat"></div>
+
+    </div>
+
+  </div>
+
+</div>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+import { getDatabase, ref, push, onValue, set, update } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyApukhtdMEAtF2O3k-3AHVcfp6-snHUZ4U",
+  authDomain: "gym-app-89adb.firebaseapp.com",
+  databaseURL: "https://gym-app-89adb-default-rtdb.europe-west1.firebasedatabase.app",
+  projectId: "gym-app-89adb",
+  storageBucket: "gym-app-89adb.firebasestorage.app",
+  messagingSenderId: "516462874734",
+  appId: "1:516462874734:web:f20f353e2fd0589836d67f"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getDatabase(app);
+
+let USER = "";
+const CORRECT_CODE = "Aura=Avinavh";
+
+// Lista di frasi motivazionali Hardcore in Inglese
+const gymQuotes = [
+  "NEVER GIVE UP! Focus on your goals and push harder!",
+  "The body achieves what the mind believes. Stay focused!",
+  "Consistency beats talent every single day. Keep grinding!",
+  "Don't count the days, make the days count. Crush it!",
+  "Today do what others won't, so tomorrow you can do what others can't.",
+  "Your sweat today is your success tomorrow. No excuses!"
+];
+
+// LOGIN
+window.login = function () {
+  const name = document.getElementById("name").value.trim();
+  const codeInput = document.getElementById("code").value.trim();
+
+  if (name && codeInput === CORRECT_CODE) {
+    USER = name;
+
+    document.getElementById("login").classList.add("hidden");
+    document.getElementById("app").classList.remove("hidden");
+    document.getElementById("gym-sidebar").classList.remove("hidden"); // Mostra la barra laterale
+    document.getElementById("user").innerText = USER;
+    document.getElementById("status").innerText = "🟢 im Gym";
+
+    // Estrae una frase hardcore casuale in inglese a ogni accesso
+    const randomQuote = gymQuotes[Math.floor(Math.random() * gymQuotes.length)];
+    document.getElementById("motivation-quote").innerText = randomQuote;
+
+    set(ref(db, "status/" + USER), { state: "🟢 im Gym" });
+
+    listen();
+  } else {
+    alert("Falscher Code oder Name fehlt");
+  }
+};
+
+// HELPER FOR DATE AND TIME
+function getFormattedTimestamp() {
+  const now = new Date();
+  const dateStr = now.toLocaleDateString([], { day: '2-digit', month: '2-digit' }); 
+  const timeStr = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }); 
+  return `${dateStr} um ${timeStr}`;
+}
+
+// POST WORKOUT
+// window.post = function () {
+//   const trainingInput = document.getElementById("training");
+//   if (!trainingInput.value.trim()) return alert("Bitte trag dein Training ein!");
+
+//   push(ref(db, "posts"), {
+//     name: USER,
+//     training: trainingInput.value,
+//     shower: document.getElementById("shower").value,
+//     sauna: document.getElementById("sauna").value,
+//     timestamp: getFormattedTimestamp(),
+//     likes: 0
+//   });
+
+//   trainingInput.value = ""; 
+// };
+
+// LIKE WORKOUT
+window.likePost = function (postId, currentLikes) {
+  const updates = {};
+  updates[`posts/${postId}/likes`] = (currentLikes || 0) + 1;
+  update(ref(db), updates);
+};
+
+// CHAT
+window.send = function () {
+  const msgInput = document.getElementById("msg");
+  if (!msgInput.value.trim()) return;
+
+  push(ref(db, "chat"), {
+    name: USER,
+    text: msgInput.value,
+    timestamp: getFormattedTimestamp()
+  });
+
+  msgInput.value = ""; 
+};
+
+// LIVE DATA
+function listen() {
+  onValue(ref(db, "posts"), (snap) => {
+    const data = snap.val() || {};
+    document.getElementById("feed").innerHTML =
+      Object.entries(data).reverse().map(([id, p]) => `
+        <div class="post">
+          <b>${p.name}</b><br>
+          🏋️‍♂️ ${p.training}<br>
+          🚿 ${p.shower} | 🧖 ${p.sauna}<br>
+          <small style="opacity:0.6;">📅 ${p.timestamp || p.time || ''}</small><br>
+          <button class="like" onclick="likePost('${id}', ${p.likes || 0})">❤️ ${p.likes || 0}</button>
+        </div>
+      `).join("");
+  });
+
+  onValue(ref(db, "chat"), (snap) => {
+    const data = snap.val() || {};
+    document.getElementById("chat").innerHTML =
+      Object.values(data).reverse().map(c => `
+        <div class="card">
+          <b>${c.name}:</b> ${c.text} <br><small style="opacity:0.4;">📅 ${c.timestamp || c.time || ''}</small>
+        </div>
+      `).join("");
+  });
+}
+
+
+function post (){ 
+
+  console.log('zzzz')
+
+}
+</script>
+
+</body>
+</html>
