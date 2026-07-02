@@ -287,21 +287,21 @@ function getFormattedTimestamp() {
 }
 
 // POST WORKOUT
-// window.post = function () {
-//   const trainingInput = document.getElementById("training");
-//   if (!trainingInput.value.trim()) return alert("Bitte trag dein Training ein!");
+ window.post = function () {
+   const trainingInput = document.getElementById("training");
+   if (!trainingInput.value.trim()) return alert("Bitte trag dein Training ein!");
 
-//   push(ref(db, "posts"), {
-//     name: USER,
-//     training: trainingInput.value,
-//     shower: document.getElementById("shower").value,
-//     sauna: document.getElementById("sauna").value,
-//     timestamp: getFormattedTimestamp(),
-//     likes: 0
-//   });
+   push(ref(db, "posts"), {
+     name: USER,
+     training: trainingInput.value,
+     shower: document.getElementById("shower").value,
+     sauna: document.getElementById("sauna").value,
+     timestamp: getFormattedTimestamp(),
+     likes: 0
+   });
 
-//   trainingInput.value = ""; 
-// };
+   trainingInput.value = ""; 
+ };
 
 // LIKE WORKOUT
 window.likePost = function (postId, currentLikes) {
