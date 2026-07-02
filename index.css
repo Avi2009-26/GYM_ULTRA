@@ -1,0 +1,148 @@
+ body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #0a0a0a;
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 100vh;
+      padding: 10px;
+      box-sizing: border-box;
+    }
+
+    /* Layout principale che sposta la casella ai fianchi su PC */
+    .main-wrapper {
+      display: flex;
+      flex-direction: row;
+      gap: 20px;
+      width: 100%;
+      max-width: 900px;
+      margin-top: 20px;
+    }
+
+    /* Casella motivazionale posizionata di lato (Sidebar) */
+    .sidebar-quote {
+      flex: 1;
+      background: linear-gradient(135deg, #111, #1c1c1c);
+      border: 2px solid #00ff88;
+      box-shadow: 0 0 15px rgba(0, 255, 136, 0.2);
+      padding: 25px;
+      border-radius: 16px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: fit-content;
+    }
+
+    .sidebar-quote h1 {
+      font-size: 26px;
+      color: #00ff88;
+      margin: 10px 0;
+      text-shadow: 0 0 10px rgba(0,255,136,0.5);
+    }
+
+    .sidebar-quote p {
+      font-size: 18px;
+      font-weight: bold;
+      letter-spacing: 0.5px;
+      margin: 15px 0;
+      line-height: 1.4;
+    }
+
+    .gym-art {
+      font-size: 45px;
+      margin: 10px 0;
+      color: #555;
+    }
+
+    /* Contenitore dell'applicazione principale (Centro) */
+    .container {
+      width: 100%;
+      max-width: 520px;
+      box-sizing: border-box; 
+    }
+
+    .card {
+      background: #1c1c1c;
+      padding: 15px;
+      margin: 12px 0;
+      border-radius: 12px;
+    }
+
+    input, select, button {
+      width: 100%;
+      padding: 12px;
+      margin-top: 10px;
+      border-radius: 10px;
+      border: none;
+      box-sizing: border-box;
+      font-size: 16px;
+    }
+
+    input, select {
+      background: #2a2a2a;
+      color: white;
+    }
+
+    button {
+      background: #00ff88;
+      color: #000;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    button:hover {
+      background: #00dd77;
+    }
+
+    .hidden { display: none !important; }
+
+    .post {
+      background: #222;
+      padding: 12px;
+      margin: 10px 0;
+      border-radius: 10px;
+    }
+
+    .like {
+      color: #ff4d4d;
+      cursor: pointer;
+      font-weight: bold;
+      border: none;
+      background: none;
+      display: inline;
+      padding: 0;
+      margin: 0;
+      width: auto;
+    }
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .status {
+      font-size: 12px;
+      opacity: 0.8;
+    }
+
+    /* GESTIONE TELEFONO: Sposta la casella sopra l'app a schermo intero */
+    @media (max-width: 768px) {
+      .main-wrapper {
+        flex-direction: column;
+        margin-top: 5px;
+      }
+      .sidebar-quote {
+        width: 100%;
+        box-sizing: border-box;
+        padding: 15px;
+      }
+      .sidebar-quote h1 { font-size: 22px; }
+      .sidebar-quote p { font-size: 16px; }
+      .gym-art { font-size: 30px; }
+    }
